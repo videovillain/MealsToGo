@@ -1,24 +1,39 @@
-import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Platform, StatusBar, Home} from 'react-native';
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Platform,
+  StatusBar,
+} from "react-native";
+import { Searchbar } from "react-native-paper";
 
-import { spacing } from './src/utils/spacing';
-import { coloring } from './src/utils/coloring.js';
+import { spacing } from "./src/utils/spacing";
+import { coloring } from "./src/utils/coloring.js";
 
-const isAndroid = Platform.OS === 'android'
+const isAndroid = Platform.OS === "android";
 
 export default function App() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const onChangeSearch = (query) => setSearchQuery(query);
+
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <View style={styles.searchContainer}>
-          <Text>search</Text>
-        </View>
+        <Searchbar
+          placeholder="Search"
+          onChangeText={onChangeSearch}
+          value={searchQuery}
+          iconColor="blue"
+        />
         <View style={styles.listContainer}>
           <Text>list</Text>
         </View>
       </SafeAreaView>
-      <ExpoStatusBar style='auto' />
+      <ExpoStatusBar style="auto" />
     </>
   );
 }
